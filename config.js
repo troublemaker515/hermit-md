@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 
-if (fs.existsSync('config.env')) require('dotenv').config({ path: './config.env' });
+if (fs.existsSync('config.env')) require('dotenv').config({ path: './config.env', override: true });
 
 function convertToBool(text, fault = 'true') {
     return text === fault ? true : false;
@@ -39,6 +39,7 @@ module.exports = {
     REJECT_CALL: toBool(process.env.REJECT_CALL),
     KOYEB_API_KEY: process.env.KOYEB_API_KEY || '',
     KOYEB_APP_NAME: process.env.KOYEB_APP_NAME || '',
+    TERMUX_VPS: toBool(process.env.TERMUX || process.env.VPS),
     HEROKU: {
         HEROKU: process.env.HEROKU === undefined ? false : convertToBool(process.env.HEROKU),
         API_KEY: process.env.HEROKU_API_KEY,
