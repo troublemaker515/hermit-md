@@ -15,7 +15,7 @@ const DATABASE_URL = process.env.DATABASE_URL === undefined ? './database.db' : 
 process.env.NODE_OPTIONS = '--max_old_space_size=2560'
 DEBUG = process.env.DEBUG === undefined ? false : convertToBool(process.env.DEBUG)
 module.exports = {
-	VERSION: 'v4.3.2', 
+	VERSION: 'v4.3.6', 
     SESSION_ID: process.env.SESSION_ID || '',
     MODE: (process.env.MODE || 'public').toLowerCase(),
     HANDLERS: (process.env.PREFIX || '^[.,!]').trim(),
@@ -40,6 +40,7 @@ module.exports = {
     KOYEB_API_KEY: process.env.KOYEB_API_KEY || '',
     KOYEB_APP_NAME: process.env.KOYEB_APP_NAME || '',
     TERMUX_VPS: toBool(process.env.TERMUX || process.env.VPS),
+    AUTO_STATUS_VIEW: toBool(process.env.AUTO_STATUS_VIEW),
     HEROKU: {
         HEROKU: process.env.HEROKU === undefined ? false : convertToBool(process.env.HEROKU),
         API_KEY: process.env.HEROKU_API_KEY,

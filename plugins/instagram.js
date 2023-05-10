@@ -2,6 +2,7 @@ const {
 	Function,
 	isPublic,
 	instagram,
+	getJson,
 	postJson,
 	getUrl
 } = require('../lib/')
@@ -13,16 +14,16 @@ Function({
 }, async (message, match, client) => {
 	match = getUrl(match || message.reply_message.text)
 	if (!match) return await message.reply('_*Need instagram link!*_')
-	/* try {
+	try {
 	var response = await instagram(match)
 	} catch (error) {
 	let { result, status } = await postJson(apiUrl + 'instagram', { url: match})
 	if (status) response = result
-	} */
-	// if  (response.length < 1 || response[0].includes('?size=l&dl=1')) {
+	} 
+	if  (response.length < 1 || response[0].includes('?size=l&dl=1')) {
 		const { result, status } = await postJson(apiUrl + 'instagram', { url: match})
     if (status) response = result
-	// }
+	 }
 	if (response.length < 1) return await message.reply("*No media found!*")
 		for (let i of response) {
 			if (i.includes('mp4')) {
@@ -68,6 +69,19 @@ Function({
 })
 
 Function({
+	pattern: 'ig ?(.*)',
+	fromMe: true,
+	fromMe: isPublic,
+	type: 'info'
+}, async (message, match, client) => {
+match = match.match(/\/([^\/]+)\//)?.[1] || match;
+if (!match) return await message.reply("*Need instagram an profile url or username.*")
+const result = await getJson(apiUrl + 'ig/' + match)
+if (!result.status) return await message.send('*Invalid username or url*')
+return await message.send(result.profile, 'image', { caption: `*Name* : ${result.name}\n*Username* : ${result.username}\n*Followers* : ${result.followers}\n*Following* : ${result.following}\n*Post* : ${result.post}\n*Bio* : ${result.bio}`})
+})
+
+Function({
 	pattern: 'fb ?(.*)',
 	fromMe: isPublic,
 	desc: 'download Facebook videos',
@@ -75,7 +89,7 @@ Function({
 }, async (message, match) => {
 	match = getUrl(match || message.reply_message.text)
 	if (!match) return await message.reply('_*Need link!*_')
-	const response = await postJson(apiUrl + 'fb', {url: match})
+	const response = await getJson(apiUrl + 'api/convert?url=' + match)
 	if (!response.status) return await message.reply("*No media found!*")
-	await message.send(response.HD, 'video')
+	await message.send(response.hd.url || response.sd.url, 'video', { captain: response.meta.title || '' })
 })

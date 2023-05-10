@@ -73,21 +73,21 @@ Function({
 	match = match || message.reply_message.text
 	if (!match) return message.reply('*Need Youtube video url or query*')
 	if (isUrl(match) && match.includes('youtu')) {
-		let ytId = ytIdRegex.exec(match)
-		const media = await combineYouTubeVideoAndAudio(ytId[1])
-		await message.send(media.file, 'video', { quoted: message.data, caption: media.title })
-		return;
+		const id = ytIdRegex.exec(match)
+		const result = await ytv('https://youtu.be/' + id[1], '360p');
+		if (!result) return await message.reply('_Failed to download_')
+		return await message.send(result.dl_link, 'video', { quoted: message.data, caption: result.title });
 	}
-	let search = await yts(match)
+	const search = await yts(match)
 	if (search.all.length < 1) return await message.reply(Lang.NO_RESULT);
-	let listbutton = [];
-	let no = 1;
-	for (var z of search.videos) {
+	const listbutton = [];
+	var num = 1;
+	for (let x of search.videos) {
 		let button = {
-			title: 'Result - ' + no++ + ' ',
+			title: 'Result - ' + num++ + ' ',
 			rows: [{
-				title: z.title,
-				rowId: prefix + 'video ' + z.url
+				title: x.title,
+				rowId: prefix + 'video ' + x.url
 			}]
 		};
 		listbutton.push(button)
@@ -97,10 +97,7 @@ Function({
 		buttonText: 'Select video',
 		sections: listbutton
 	}
-	await message.send(`And ${listbutton.length} More Results...`, 'text', {
-		quoted: message.data,
-		...listMessage
-	})
+	return await message.send(`And ${listbutton.length} More Results...`, 'text', { quoted: message.data, ...listMessage });
 });
 
 Function({
