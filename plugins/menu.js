@@ -44,7 +44,7 @@ Function({
 	let msg = `╭━━━〔 ${BOT_INFO.split(";")[0]} ⁩〕━━━┈⊷
 ┃✵╭──────────────
 ┃✵│ Owner : ${BOT_INFO.split(";")[1]}
-┃✵│ User : ${m.pushName}
+┃✵│ User : ${m.pushName.replace( /[\r\n]+/gm, "" )}
 ┃✵│ Plugins : ${commands.length}
 ┃✵│ Runtime : ${runtime(process.uptime())}
 ┃✵│ Mode : ${MODE}
@@ -97,3 +97,5 @@ const runtime = function(seconds) {
 	var sDisplay = s > 0 ? s + (s == 1 ? " s" : " s") : "";
 	return dDisplay + hDisplay + mDisplay + sDisplay;
 }
+
+exports.runtime = runtime;
