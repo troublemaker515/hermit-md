@@ -31,6 +31,35 @@ Hermit-md - Simple whatsapp Multi Device whatsapp bot.
 
 2. Now Deploy
     <br>
-<a href='https://hermit.adithyan.xyz/deploy-koyeb' target="_blank"><img alt='DEPLOY' src='https://img.shields.io/badge/-DEPLOY-black?style=for-the-badge&logo=koyeb&logoColor=white'/></a>  
+<a href='https://hermit.adithyan.xyz/deploy-koyeb' target="_blank"><img alt='DEPLOY' src='https://img.shields.io/badge/-DEPLOY-black?style=for-the-badge&logo=koyeb&logoColor=white'/></a>
+
+#### DEPLOY TO RAILWAY
+
+1. If You don't have a account in railway. Create a account.
+    <br>
+<a href='https://railway.app/login' target="_blank"><img alt='railway' src='https://img.shields.io/badge/-Create-black?style=for-the-badge&logo=railway&logoColor=white'/></a>
+
+2. Now Deploy
+    <br>
+<a href='https://railway.app/template/q20OfH?referralCode=b9IKyc' target="_blank"><img alt='DEPLOY' src='https://img.shields.io/badge/-DEPLOY-black?style=for-the-badge&logo=railway&logoColor=white'/></a>
+
+
 ***
 <a href="https://chat.whatsapp.com/Czc4zb42smmHIkso3Od0ir"><img alt="WhatsApp" src="https://img.shields.io/badge/-Whatsapp%20Group-blue?style=for-the-badge&logo=whatsapp&logoColor=white"/></a>
+
+## Support Me
+
+If you find this project helpful and would like to support my efforts, you can show your appreciation in three ways:
+
+1. **Buy Me a Coffee**: Your support will help me stay motivated and continue working on exciting projects like this one.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.buymeacoffee.com/adithyanr">
+  <img src="https://i.ibb.co/KNnhcvX/bmc-button.png" alt="Buy Me Coffee" height="40" width="150" style="margin-left: 60px;">
+</a>
+
+
+2. **Donate USDT (Tether) Crypto**: You can also support me by donating crypto directly to my USDT wallet. Your contribution will go a long way in helping me improve and maintain this project.
+
+   Crypto Wallet Address: `0x816a82f51b45e97ffeff60e177ae79f5ae971efb`
+
+Your generosity is greatly appreciated!
