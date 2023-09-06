@@ -161,3 +161,54 @@ Function({
     await message.send(await pdf(), 'document', { fileName: 'document.pdf' });
 }
 });
+
+Function({
+	pattern: 'black ?(.*)',
+	fromMe: isPublic,
+	desc: 'convert audio to black video',
+	type: 'media'
+}, async (message, match, client) => {
+	if (!(message.reply_message && message.reply_message.audio)) return await message.reply('*Reply to a audio*');
+	const msg = await message.reply('_Converting.._');
+	const media = await message.reply_message.downloadAndSaveMedia();
+	exec('ffmpeg -y -i ' + media + ' audio.aac', () => {
+		exec("ffmpeg -y -loop 1 -framerate 1 -i media/media_tools/black.jpg -i audio.aac -map 0 -map 1:a -c:v libx264 -preset ultrafast -profile:v baseline -tune stillimage -vf \"scale='min(360,iw)':-2,format=yuv420p\" -c:a copy -shortest black.mp4", (error) => {
+			if (error) {
+				msg.edit(`Error: ${error.message}`);
+				return;
+			}
+			message.send('black.mp4', 'video')
+			msg.edit('_Audio to black video conversion successful._')
+			fs.unlinkSync('black.mp4')
+		});
+	});
+})
+
+Function({
+	pattern: 'rotate ?(.*)',
+	fromMe: isPublic,
+	desc: 'rotate image or video in any direction',
+	type: 'media'
+}, async (message, match, client) => {
+	if (!(message.reply_message && (message.reply_message.video || message.reply_message.image))) return await message.reply('*Reply to an image/video*');
+	if (!match || !['left', 'right', 'horizontal', 'vertical'].includes(match.toLowerCase())) {
+		return await message.reply('*Need rotation type.*\n_Example: .rotate left, right, horizontal, or vertical_');
+	}
+	const rotateOptions = {
+		left: 'transpose=2',
+		right: 'transpose=1',
+		horizontal: 'hflip',
+		vertical: 'vflip',
+	};
+	const media = await message.reply_message.downloadFile();
+	const ext = media.endsWith('.mp4') ? 'mp4' : 'jpg';
+	const ffmpegCommand = `ffmpeg -y -i ${media} -vf "${rotateOptions[match.toLowerCase()]}" rotated.${ext}`;
+	exec(ffmpegCommand, (error, stdout, stderr) => {
+		if (error) {
+			message.reply(`Error during rotation: ${error.message}`);
+		} else {
+			message.send(`rotated.${ext}`, media.endsWith('.mp4') ? 'video' : 'image');
+			fs.unlinkSync(`rotated.${ext}`)
+		}
+	});
+});
