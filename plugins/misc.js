@@ -116,7 +116,7 @@ message.send(result_info)
 
 Function({pattern: 'reboot ?(.*)', fromMe: true, desc: 'reboot bot.', type: 'misc'}, async (m) => {
 await m.reply('_Rebooting..._')
-require('pm2').restart('index.js');
+require('pm2').restart('hermit-md')
 });
 
 Function({pattern: 'whois ?(.*)', fromMe: isPublic, type: 'info'}, async (message, match) => {
@@ -232,3 +232,49 @@ Function({
         (notonwaText.length > 0 ? `*Numbers Not Registered on WhatsApp:* ${result.notExisting.length}\n\n${notonwaText.join('\n').trim()}` : '')
     );
 });
+
+Function({
+	pattern: 'settings ?(.*)',
+	fromMe: true,
+	desc: 'enable or disable variables',
+	type: 'user'
+}, async (message, match, client) => {
+
+const booleanVars = [
+    'SEND_READ',
+    'READ_MSG',
+    'LOG_MSG',
+    'ALWAYS_ONLINE',
+    'ERROR_MESSAGE',
+    'SONG_THUMBNAIL',
+    'REJECT_CALL',
+    'AUTO_STATUS_VIEW',
+    'START_MSG',
+];
+
+const buttons = booleanVars.flatMap((variable) => [
+    {
+        type: 'list',
+        maintitle: variable,
+        header: 'ENABLE',
+        title: '',
+        description: 'Set ' + variable + ' to true',
+        id: prefix + 'setvar ' + variable + ':true'
+    },
+    {
+        type: 'list',
+        header: 'DISABLE',
+        title: '',
+        description: 'Set ' + variable + ' to false',
+        id: prefix + 'setvar ' + variable + ':false'
+    }
+]);
+
+await client.interactiveMessage(message.chat, {
+    title: 'Enable/Disable Variables',
+    text: 'Choose a variable to enable or disable:',
+    footer: 'hermit-md',
+    buttons: buttons
+});
+
+})

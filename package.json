@@ -1,6 +1,6 @@
 {
   "name": "hermit-md",
-  "version": "4.4.1",
+  "version": "4.4.3",
   "description": "Hermit-md - Simple whatsapp Multi Device bot based on @adiwajshing/baileys.",
   "main": "index.js",
   "scripts": {
@@ -12,14 +12,13 @@
     "@adiwajshing/baileys": "git+https://github.com/A-d-i-t-h-y-a-n/Baileys.js.git",
     "@adiwajshing/keyed-db": "^0.2.4",
     "acrcloud": "^1.4.0",
-    "axios": "^0.24.0",
+    "axios": "^1.6.8",
     "browser-id3-writer": "^4.4.0",
     "chalk": "^4.1.2",
     "cheerio": "^1.0.0-rc.10",
     "child_process": "^1.0.2",
     "cookie": "^0.5.0",
     "dotenv": "^16.0.3",
-    "express": "latest",
     "file-type": "^16.5.3",
     "fluent-ffmpeg": "^2.1.2",
     "fs": "0.0.1-security",
@@ -37,6 +36,7 @@
     "node-cache": "^5.1.2",
     "node-cron": "^3.0.0",
     "node-fetch": "^2.6.1",
+    "node-koyeb-api": "^1.0.7",
     "node-webpmux": "^3.1.0",
     "openai": "^3.1.0",
     "os": "^0.1.2",
@@ -56,6 +56,6 @@
     "translate-google-api": "^1.0.4",
     "util": "^0.12.4",
     "yargs": "^17.2.1",
-    "youtubei.js": "^5.1.0"
+    "youtubei.js": "^9.3.0"
   }
 }
